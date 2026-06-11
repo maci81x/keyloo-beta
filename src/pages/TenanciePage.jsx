@@ -24,13 +24,23 @@ export default function TenanciePage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    supabase
-      .from('tenancies')
-      .select('*, properties(indirizzo, citta, provincia)')
-      .or(`landlord_id.eq.${user.id},tenant_id.eq.${user.id},created_by.eq.${user.id}`)
-      .order('created_at', { ascending: false })
-      .then(({ data }) => { setTenancies(data || []); setLoading(false) })
-  }, [user.id])
+    if (!user) return
+    const load = async () => {
+      setLoading(true)
+      const { data, error } = await supabase
+        .from('tenancies')
+        .select(`*, properties(indirizzo, citta, cap, provincia)`)
+        .or(`landlord_id.eq.${user.id},tenant_id.eq.${user.id}`)
+        .order('created_at', { ascending: false })
+      console.log('USER ID:', user?.id)
+      console.log('TENANCIES DATA:', data)
+      console.log('TENANCIES ERROR:', error)
+      if (error) console.error('TENANCIES ERROR:', error)
+      setTenancies(data || [])
+      setLoading(false)
+    }
+    load()
+  }, [user])
 
   const filtered = filtro === 'Tutte' ? tenancies : tenancies.filter(t => t.stato === filtro)
 

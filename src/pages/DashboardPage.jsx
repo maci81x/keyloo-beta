@@ -24,14 +24,27 @@ export default function DashboardPage() {
 
   useEffect(() => {
     async function load() {
-      const [revRes, tenRes] = await Promise.all([
-        supabase.from('reviews').select('*').eq('recipient_id', user.id).eq('stato', 'pubblicata').order('published_at', { ascending: false }).limit(10),
-        supabase.from('tenancies').select('*, properties(indirizzo, citta)').or(`landlord_id.eq.${user.id},tenant_id.eq.${user.id}`).order('created_at', { ascending: false }),
-      ])
-      const revs = revRes.data || []
-      const tens = tenRes.data || []
-      console.log('DASHBOARD REVIEWS:', revs, 'ERROR:', revRes.error)
-      console.log('DASHBOARD TENANCIES:', tens, 'ERROR:', tenRes.error)
+      const { data: reviewsData, error: revErr } = await supabase
+        .from('reviews')
+        .select('*')
+        .eq('recipient_id', user.id)
+        .eq('stato', 'pubblicata')
+        .order('published_at', { ascending: false })
+        .limit(10)
+      console.log('USER ID:', user?.id)
+      console.log('REVIEWS DATA:', reviewsData)
+      console.log('REVIEWS ERROR:', revErr)
+
+      const { data: tenanciesData, error: tenErr } = await supabase
+        .from('tenancies')
+        .select('*, properties(indirizzo, citta)')
+        .or(`landlord_id.eq.${user.id},tenant_id.eq.${user.id}`)
+        .order('created_at', { ascending: false })
+      console.log('TENANCIES DATA:', tenanciesData)
+      console.log('TENANCIES ERROR:', tenErr)
+
+      const revs = reviewsData || []
+      const tens = tenanciesData || []
       setReviews(revs)
       setTenancies(tens)
 

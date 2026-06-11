@@ -53,7 +53,9 @@ export default function ProfiloPage() {
       .eq('stato', 'pubblicata')
       .order('published_at', { ascending: false })
       .then(({ data, error }) => {
-        console.log('PROFILO REVIEWS:', data, 'ERROR:', error)
+        console.log('USER ID:', user?.id)
+        console.log('PROFILO REVIEWS DATA:', data)
+        console.log('PROFILO REVIEWS ERROR:', error)
         setReviews(data || [])
         setLoadingReviews(false)
       })
