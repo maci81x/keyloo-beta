@@ -4,4 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: '/keyloo-beta/',
+  server: { port: 3000, host: true },
 })
