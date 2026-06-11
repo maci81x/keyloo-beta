@@ -13,6 +13,7 @@ import ProfiloPage from './pages/ProfiloPage'
 import VerificaIdentitaPage from './pages/VerificaIdentitaPage'
 import AdminPage from './pages/AdminPage'
 import ProfiloPubblicoPage from './pages/ProfiloPubblicoPage'
+import PagamentoPage from './pages/PagamentoPage'
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth()
@@ -49,6 +50,7 @@ export default function App() {
       <Route path="/locazioni/:id" element={<ProtectedRoute><DettaglioTenancyPage /></ProtectedRoute>} />
       <Route path="/profilo" element={<ProtectedRoute><ProfiloPage /></ProtectedRoute>} />
       <Route path="/verifica-identita" element={<ProtectedRoute><VerificaIdentitaPage /></ProtectedRoute>} />
+      <Route path="/pagamento/:tipo" element={<ProtectedRoute><PagamentoPage /></ProtectedRoute>} />
 
       <Route path="/admin" element={<AdminRoute><AdminPage /></AdminRoute>} />
     </Routes>

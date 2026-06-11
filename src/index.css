@@ -1,24 +1,49 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: #f9fafb;
+    background-color: #f3f4f8;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-[#1a3a5c] text-white font-medium px-4 py-2 rounded-xl hover:bg-[#15304d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm;
+    @apply bg-[#1a3a5c] text-white font-semibold px-4 py-2 rounded-xl hover:bg-[#15304d] active:scale-95 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed text-sm shadow-sm;
   }
   .btn-secondary {
-    @apply bg-gray-100 text-gray-700 font-medium px-4 py-2 rounded-xl hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm;
+    @apply bg-white text-gray-700 font-medium px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50 active:scale-95 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed text-sm shadow-sm;
+  }
+  .btn-success {
+    @apply bg-[#10b981] text-white font-semibold px-4 py-2 rounded-xl hover:bg-[#059669] active:scale-95 transition-all duration-150 disabled:opacity-50 text-sm shadow-sm;
   }
   .card {
-    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-4;
+    @apply bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-white/60 p-4 transition-all duration-200;
+  }
+  .card-hover {
+    @apply bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm border border-white/60 p-4 transition-all duration-200 hover:shadow-md hover:scale-[1.01] cursor-pointer;
+  }
+  .card-glass {
+    @apply rounded-2xl p-4 transition-all duration-200;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 4px 24px rgba(26,58,92,0.06);
   }
   .badge-verified {
-    @apply inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-[#10b981]/10 text-[#10b981] font-medium;
+    @apply inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-[#10b981]/10 text-[#10b981] font-semibold;
+  }
+  .input-field {
+    @apply w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-[#1a3a5c] focus:ring-2 focus:ring-[#1a3a5c]/10 transition-all bg-white;
+  }
+  .section-title {
+    @apply font-bold text-gray-800 tracking-tight flex items-center gap-2;
+  }
+  .pill-filter-active {
+    @apply px-3 py-1 rounded-full text-xs font-medium transition-all duration-150 border cursor-pointer bg-[#1a3a5c] text-white border-[#1a3a5c];
+  }
+  .pill-filter-inactive {
+    @apply px-3 py-1 rounded-full text-xs font-medium transition-all duration-150 border cursor-pointer bg-white text-gray-600 border-gray-200 hover:border-[#1a3a5c]/30;
   }
 }
