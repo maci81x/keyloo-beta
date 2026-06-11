@@ -30,6 +30,8 @@ export default function DashboardPage() {
       ])
       const revs = revRes.data || []
       const tens = tenRes.data || []
+      console.log('DASHBOARD REVIEWS:', revs, 'ERROR:', revRes.error)
+      console.log('DASHBOARD TENANCIES:', tens, 'ERROR:', tenRes.error)
       setReviews(revs)
       setTenancies(tens)
 

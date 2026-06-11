@@ -52,7 +52,11 @@ export default function ProfiloPage() {
       .eq('recipient_id', user.id)
       .eq('stato', 'pubblicata')
       .order('published_at', { ascending: false })
-      .then(({ data }) => { setReviews(data || []); setLoadingReviews(false) })
+      .then(({ data, error }) => {
+        console.log('PROFILO REVIEWS:', data, 'ERROR:', error)
+        setReviews(data || [])
+        setLoadingReviews(false)
+      })
   }, [user.id])
 
   function handleChange(e) { setForm(prev => ({ ...prev, [e.target.name]: e.target.value })) }
